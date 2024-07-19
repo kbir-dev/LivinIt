@@ -1,15 +1,22 @@
+import React from 'react'
+import Layout from './Layout'
+import IndexPage from './pages/p-jsx/IndexPage'
+import LoginPage from './pages/p-jsx/LoginPage'
+import RegisterPage from './pages/p-jsx/RegisterPage'
+import { Routes, Route } from "react-router-dom"
 import "./App.css"
-import Header from "./components/Header"
-import {Routes,Route} from "react"
-import IndexPage from "./pages/IndexPage"
 
-
-function App() {
-
+const App = () => {
   return (
-    <Routes>
-      <Route path={"/"} element={<IndexPage />}/>
-    </Routes>
+    <>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<IndexPage />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/register' element={<RegisterPage />}/>
+        </Route>
+      </Routes>
+    </>
   )
 }
 

@@ -1,11 +1,10 @@
 import React from 'react'
-import Header from '../components/Header'
 
 const IndexPage = () => {
   return (
-    <>
-    <Header />
-    </>
+    <div>
+      I am Index Page
+    </div>
   )
 }
 
