@@ -4,7 +4,10 @@ import IndexPage from './pages/p-jsx/IndexPage'
 import LoginPage from './pages/p-jsx/LoginPage'
 import RegisterPage from './pages/p-jsx/RegisterPage'
 import { Routes, Route } from "react-router-dom"
+import axios from "axios"
 import "./App.css"
+
+axios.defaults.baseURL = "http://localhost:3000"
 
 const App = () => {
   return (
