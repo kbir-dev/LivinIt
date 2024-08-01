@@ -1,19 +1,33 @@
-import React from 'react'
+import {React,useState} from 'react'
 import "../p-css/LoginPage.css"
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { Link,Navigate } from 'react-router-dom'
+import axios from "axios"
 
 const LoginPage = () => {
     const [userInput, setUserInput] = useState({
-        email : '',
-        password : ''
+        email: '',
+        password: ''
     })
+    const[redirect,setRedirect] = useState(false)
 
-    function loginUser(){
-        axios.post("/login",{
-            email,
-            password
-        })
+    function loginUser(e) {
+        e.preventDefault();
+        // console.log('Email:', userInput.email, typeof(email.value)); // Should log a string
+        // console.log('Password:', userInput.password , typeof(password.value)); // Should log a string
+
+        axios.post("/login", userInput)
+            .then(response => {
+                console.log('Login successful:', response.data);
+                setRedirect(true); // Redirect to home page upon successful login
+            })
+            .catch(error => {
+                console.error('Error during login:', error.message);
+                // You might also want to handle specific error cases
+            });
+    }
+
+    if(redirect){
+        return <Navigate to={"/"} />
     }
 
 
@@ -24,8 +38,12 @@ const LoginPage = () => {
                     <div className="card-body d-flex flex-column gap-3">
                         <h3 className="card-title text-center mb-2">Login</h3>
                         <form className='d-flex flex-column gap-4' onSubmit={loginUser}>
-                            <input type="email" className="form-control rounded-pill" id="email" placeholder="Enter email" value={userInput.email}/>
-                            <input type="password" className="form-control rounded-pill" id="password" placeholder="Password" />
+                            <input type="email" className="form-control rounded-pill" id="email" placeholder="Enter email"
+                                value={userInput.email}
+                                onChange={(e) => setUserInput({ ...userInput, email: e.target.value })}
+                            />
+                            <input type="password" className="form-control rounded-pill" id="password" placeholder="Password" value={userInput.password}
+                                onChange={(e) => setUserInput({ ...userInput, password: e.target.value })} />
                             <button type="submit" className="btn root-bg-color btn-block text-white rounded-pill">Login</button>
                         </form>
                         <div>Don't have an account yet ? <Link to="/register" className='text-decor-none'>Register</Link></div>

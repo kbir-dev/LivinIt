@@ -5,8 +5,11 @@ import dotenv from "dotenv"
 import connectToDB from "./db/database.js"
 dotenv.config()
 const port = process.env.PORT;
+import cookieParser from "cookie-parser"
 
 connectToDB();
+
+app.use(cookieParser());
 
 app.use(cors(
     {
@@ -26,7 +29,7 @@ app.get('/', (req, res) => {
 import router from "./routes/user.routes.js"
 
 //decalring routes
-app.use("/api/user", router)
+app.use("/api/user",router)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

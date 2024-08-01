@@ -15,10 +15,11 @@ const RegisterPage = () => {
     async function registerUser(e) {
         e.preventDefault();
         try {
+            console.log("I am here")
             const response = await axios.post('/register', userInput);
             console.log('Registration successful:', response.data);
           } catch (error) {
-            console.error('Registration failed:', error.response);
+            console.log('Registration failed:', error.message);
           }
     }
 
