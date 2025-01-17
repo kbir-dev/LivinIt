@@ -5,10 +5,12 @@ import jwt from 'jsonwebtoken';
 
 
 const loginUser = async(req,res) => {
+  console.log("Yayy")
         const { email, password } = req.body;
       
         try {
           // Find the user by email
+          console.log(email)
           const user = await User.findOne({ email });
       
           if (!user) {
@@ -40,7 +42,7 @@ const loginUser = async(req,res) => {
             sameSite: 'strict',
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
           });
-      
+      console.log("I am here 2")
           // Send response
           res.status(200).json({ message: 'Logged in successfully' });
         } catch (error) {

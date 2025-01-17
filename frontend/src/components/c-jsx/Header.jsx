@@ -8,7 +8,7 @@ import "../c-css/Header.css"
 const Header = () => {
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light px-4 py-3">
+            <nav className="navbar navbar-expand-lg navbar-light  px-4 py-3">
 
                 <div className="container-fluid d-flex justify-content-between">
                     <div className="div-1">
@@ -19,7 +19,7 @@ const Header = () => {
                     </div>
 
 
-                    <div className="div-2 d-none d-lg-flex align-items-center gap-2 border rounded-pill px-3 py-1">
+                    <div className="div-2 d-none d-lg-flex align-items-center gap-2 border rounded-pill px-3 py-1 shadow">
                         <div>Anywhere</div>
                         <div className='border border-gray separator'></div>
                         <div>Any week</div>

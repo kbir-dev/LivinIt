@@ -1,7 +1,8 @@
-import {React,useState} from 'react'
+import {React,useContext,useState} from 'react'
 import "../p-css/LoginPage.css"
 import { Link,Navigate } from 'react-router-dom'
 import axios from "axios"
+import { UserContext } from '../../UserContext'
 
 const LoginPage = () => {
     const [userInput, setUserInput] = useState({
@@ -9,21 +10,22 @@ const LoginPage = () => {
         password: ''
     })
     const[redirect,setRedirect] = useState(false)
+    const {setUser} = useContext(UserContext)
 
-    function loginUser(e) {
+    async function loginUser(e) {
         e.preventDefault();
         // console.log('Email:', userInput.email, typeof(email.value)); // Should log a string
         // console.log('Password:', userInput.password , typeof(password.value)); // Should log a string
 
-        axios.post("/login", userInput)
-            .then(response => {
-                console.log('Login successful:', response.data);
-                setRedirect(true); // Redirect to home page upon successful login
-            })
-            .catch(error => {
-                console.error('Error during login:', error.message);
-                // You might also want to handle specific error cases
-            });
+        try {
+            console.log("I am here")
+            const response = await axios.post("/login", userInput);
+            console.log('Login successful:', response.data);
+            setUser(response.data)
+            setRedirect(true); // Redirect to home page upon successful login
+          } catch (error) {
+            console.error('Error during login:', error.message)
+          }
     }
 
     if(redirect){
